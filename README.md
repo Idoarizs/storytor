@@ -26,7 +26,7 @@ Storytor is a minimalist web application designed for **writers, researchers, or
 #### Data Storage
 
 - 🔒 **Local Storage** – All your drafts and stories are stored securely in your own browser  
-- ⚠️ **Note**: If your browser data/cache is cleared, **all saved stories will be permanently deleted**
+⚠️ **Note**: If your browser data/cache is cleared, **all saved stories will be permanently deleted**
 
 ---
 
@@ -54,7 +54,7 @@ npm install npm@latest -g
 
 ## ⚙️ Installation
 
-1. Clone this repo.
+1. ⿻ Clone this repo.
    ```sh
    git clone https://github.com/Idoarizs/storytor
    ```
@@ -62,11 +62,11 @@ npm install npm@latest -g
    ```sh
    cd storytor
    ```
-3. Install all the package used.
+3. ⬇ Install all the package used.
    ```sh
    npm install
    ```
-4. Try run the server.
+4. 👨🏻‍💻 Run the server.
    ```sh
    npm run dev
    ```
