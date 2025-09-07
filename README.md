@@ -15,14 +15,14 @@ Storytor is a minimalist web application designed for **writers, researchers, or
 
 ---
 
-### 🛠 Writing Tools
+### Writing Tools
 
 - 🖊 **Formatting Toolbar** – Bold, italic, headings, lists, quotes, and more  
 - 📑 **Rich Text Support** – Powered by Tiptap for a clean editing experience   
 
 ---
 
-### 💾 Data Storage
+### Data Storage
 
 - 🔒 **Local Storage** – All your drafts and stories are stored securely in your own browser  
 - ⚠️ **Note**: If your browser data/cache is cleared, **all saved stories will be permanently deleted**
