@@ -10,7 +10,7 @@ const props = defineProps<{ editor: Editor }>();
 
 <template>
   <div
-    class="fixed bottom-4 left-0 right-0 bg-white/10 backdrop-blur-xl shadow-xl rounded-full flex items-center w-fit mx-auto px-4 py-2 z-50"
+    class="fixed bottom-4 left-0 right-0 bg-white/10 backdrop-blur-xl shadow-xl rounded-full flex items-center w-fit mx-auto overflow-x-auto max-w-xs md:max-w-full px-4 py-2 z-50"
   >
     <div class="flex gap-2">
       <button
@@ -25,7 +25,7 @@ const props = defineProps<{ editor: Editor }>();
         ]"
         :title="opt.title"
       >
-        <component :is="opt.icon" class="w-4 h-4" />
+        <component :is="opt.icon" class="w-4 h-auto" />
       </button>
     </div>
   </div>

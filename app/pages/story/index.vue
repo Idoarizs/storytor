@@ -44,20 +44,20 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="sm:max-w-2xl lg:max-w-6xl mx-auto">
+  <div class="max-w-xs md:max-w-6xl mx-auto">
     <!-- header -->
-    <div class="sticky top-16 flex gap-2 z-50 justify-between items-start my-16">
+    <div class="md:sticky md:top-16 flex md:flex-row gap-2 z-50 justify-between items-start my-8 md:my-16">
       <div class="flex flex-col gap-2">
-        <span class="text-6xl font-bold"
+        <span class="text-4xl md:text-6xl font-bold"
           >Your <br />
           Stories</span
         >
 
-        <i>"Sharing moments that inspire"</i>
+        <i class="text-sm md:text-normal">"Sharing moments that inspire"</i>
       </div>
 
       <button @click="toPath('create')" class="flex gap-2 items-center">
-        <span>Write a Story</span>
+        <span class="text-xs md:text-normal">Write a Story</span>
         <Pen class="w-8 h-auto p-2 bg-black text-white" />
       </button>
     </div>
@@ -90,7 +90,7 @@ onUnmounted(() => {
         >
           <!-- title -->
           <div class="flex items-center justify-between gap-4">
-            <span class="text-lg font-semibold truncate">
+            <span class="text-sm md:text-lg font-semibold truncate">
               {{ story.title }}
             </span>
             <button>

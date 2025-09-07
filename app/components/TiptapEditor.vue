@@ -60,14 +60,14 @@ onUnmounted(() => {
     </button>
 
     <!-- Editor & Toolbar -->
-    <div class="p-16">
+    <div class="p-8 md:p-16">
       <EditorContent v-if="editor" :editor="editor" />
     </div>
 
     <TiptapToolbar v-if="editor" :editor="editor" />
 
     <!-- Save & Export Button -->
-    <div class="fixed bottom-6 right-6 flex flex-col gap-2">
+    <div class="fixed bottom-20 md:bottom-6 right-6 flex flex-col gap-2">
       <button
         @click="
           () => {
@@ -79,7 +79,7 @@ onUnmounted(() => {
             }
           }
         "
-        class="bg-white/10 backdrop-blur-xl px-4 py-2 rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
+        class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
       >
         <Save class="w-4 h-4" />
         {{ props.type === "create" ? "Create" : "Save" }}
