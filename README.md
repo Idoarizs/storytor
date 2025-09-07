@@ -11,18 +11,19 @@ Storytor is a minimalist web application designed for **writers, researchers, or
 - 📝 **Create Stories** – Draft and add new story ideas anytime  
 - 📂 **Read Stories** – Access your saved drafts instantly  
 - ✏️ **Update Stories** – Edit and refine your drafts as they grow  
-- ❌ **Delete Stories** – Remove stories you no longer need  
+- ❌ **Delete Stories** – Remove stories you no longer need
+- 💾 **Export to PDF** – Download your stories as PDF files for backup or sharing  
 
 ---
 
-### Writing Tools
+#### Writing Tools
 
 - 🖊 **Formatting Toolbar** – Bold, italic, headings, lists, quotes, and more  
 - 📑 **Rich Text Support** – Powered by Tiptap for a clean editing experience   
 
 ---
 
-### Data Storage
+#### Data Storage
 
 - 🔒 **Local Storage** – All your drafts and stories are stored securely in your own browser  
 - ⚠️ **Note**: If your browser data/cache is cleared, **all saved stories will be permanently deleted**
