@@ -1,9 +1,3 @@
-# 📖 Storytor
-
-Minimalist space for **data-based storytellers and writers** to draft ideas and collect references — **free forever**.
-
----
-
 # 💡 About
 
 Storytor is a minimalist web application designed for **writers, researchers, or even storytellers** who want a clean space to:
