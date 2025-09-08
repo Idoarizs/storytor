@@ -104,7 +104,7 @@ onUnmounted(() => {
                 $router.back();
               } else {
                 updateStory(editor, props.id, title);
-                show('Story updated successfully!');
+                show('Story saved successfully!');
               }
             }
           "

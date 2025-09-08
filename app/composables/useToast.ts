@@ -5,13 +5,9 @@ const isOpen = ref(false);
 const message = ref("");
 
 const useToast = () => {
-  function show(msg: string, duration = 3000) {
+  const show = (msg: string) => {
     message.value = msg;
     isOpen.value = true;
-
-    setTimeout(() => {
-      isOpen.value = false;
-    }, duration);
   }
 
   return {
