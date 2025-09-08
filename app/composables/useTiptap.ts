@@ -9,7 +9,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import FileHandler from "@tiptap/extension-file-handler";
 
-export const useTiptap = () => {
+const useTiptap = () => {
   const editor = ref<Editor | null>(null);
 
   onMounted(() => {

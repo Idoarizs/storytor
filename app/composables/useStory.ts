@@ -1,7 +1,7 @@
 // tiptap [types]
 import type { Editor } from "@tiptap/vue-3";
 
-export const useStory = () => {
+const useStory = () => {
   const STORAGE_KEY = "stories";
 
   function getAllStories() {
