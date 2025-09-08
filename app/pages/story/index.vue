@@ -9,6 +9,9 @@ import { useStory } from "@/composables/index";
 // icons
 import { FileText, Trash2, Pen } from "lucide-vue-next";
 
+// motion
+import { motion } from "motion-v";
+
 const { getAllStories, deleteStory } = useStory();
 
 const stories = ref<any[]>([]);
@@ -45,8 +48,9 @@ onUnmounted(() => {
 
 <template>
   <div class="max-w-xs md:max-w-6xl mx-auto">
-    <!-- header -->
-    <div class="md:sticky md:top-16 flex md:flex-row gap-2 z-50 justify-between items-start my-8 md:my-16">
+    <div
+      class="md:sticky md:top-16 flex md:flex-row gap-2 z-50 justify-between items-start my-8 md:my-16"
+    >
       <div class="flex flex-col gap-2">
         <span class="text-4xl md:text-6xl font-bold"
           >Your <br />
@@ -62,31 +66,63 @@ onUnmounted(() => {
       </button>
     </div>
 
-    <!-- content -->
     <div
       v-if="stories.length === 0"
       class="flex flex-col items-center justify-center min-h-dvh gap-4"
     >
-      <FileText class="w-8 h-auto" />
-      <p>No story found</p>
+      <motion.div
+        :initial="{ opacity: 0, y: 20 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :transition="{
+          type: 'spring',
+          stiffness: 300,
+          damping: 15,
+          duration: 1,
+        }"
+      >
+        <FileText class="w-8 h-auto" />
+      </motion.div>
+
+      <motion.div
+        :initial="{ opacity: 0, y: 20 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :transition="{
+          type: 'spring',
+          stiffness: 300,
+          damping: 15,
+          duration: 1,
+          delay: 0.2,
+        }"
+      >
+        <p>No story found</p>
+      </motion.div>
     </div>
 
     <div
       v-else
       class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
-      <div
+      <motion.div
         v-for="story in stories"
         :key="story.id"
-        class="relative group cursor-pointer"
+        class="relative cursor-pointer"
+        :initial="{ opacity: 0, y: 20, x: 20 }"
+        :animate="{ opacity: 1, y: 0, x: 0 }"
+        :while-hover="{ scale: 1.05, rotate: 1 }"
+        :while-press="{ scale: 0.95, rotate: 0 }"
+        :transition="{
+          type: 'spring',
+          stiffness: 300,
+          damping: 15,
+          delay: 0.2 * stories.indexOf(story),
+          duration: 1,
+        }"
       >
-        <!-- retro shadow background -->
         <div class="absolute top-2 left-2 w-full h-full bg-black z-0"></div>
 
-        <!-- card -->
         <div
           @click="toPath('detail', story.id)"
-          class="relative bg-white border-2 border-black p-4 z-10 transition-all duration-300 group-hover:-translate-y-1 group-hover:-translate-x-1"
+          class="relative bg-white border-2 border-black p-4 z-10"
         >
           <!-- title -->
           <div class="flex items-center justify-between gap-4">
@@ -101,7 +137,7 @@ onUnmounted(() => {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   </div>
 </template>

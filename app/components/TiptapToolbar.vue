@@ -5,12 +5,24 @@ import type { Editor } from "@tiptap/vue-3";
 // data
 import { toolbarOption } from "@/data/toolbarOption";
 
+// motion
+import { motion } from "motion-v";
+
 const props = defineProps<{ editor: Editor }>();
 </script>
 
 <template>
-  <div
+  <motion.div
     class="fixed bottom-4 left-0 right-0 bg-white/10 backdrop-blur-xl shadow-xl rounded-full flex items-center w-fit mx-auto overflow-x-auto max-w-xs md:max-w-full px-4 py-2 z-50"
+    :initial="{ opacity: 0, y: 20 }"
+    :while-in-view="{ opacity: 1, y: 0 }"
+    :transition="{
+      type: 'spring',
+      stiffness: 300,
+      damping: 15,
+      duration: 1,
+      delay: 0.2,
+    }"
   >
     <div class="flex gap-2">
       <button
@@ -28,5 +40,5 @@ const props = defineProps<{ editor: Editor }>();
         <component :is="opt.icon" class="w-4 h-auto" />
       </button>
     </div>
-  </div>
+  </motion.div>
 </template>
