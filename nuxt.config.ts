@@ -35,7 +35,13 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify({ autoImport: true }));
       });
     },
+
+    // google analytics
+    "nuxt-gtag",
   ],
+  gtag: {
+    id: process.env.GA_TRACKING_ID
+  },
   build: {
     transpile: ["vuetify"],
   },
