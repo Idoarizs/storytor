@@ -3,7 +3,7 @@
 import type { Editor } from "@tiptap/vue-3";
 
 // data
-import { toolbarOption } from "@/data/toolbarOption";
+import { toolbarOption } from "@/data/data";
 
 // motion
 import { motion } from "motion-v";
