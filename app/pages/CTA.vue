@@ -4,6 +4,7 @@ import { motion } from "motion-v";
 </script>
 
 <template>
+  <!-- content -->
   <section class="py-20 px-6 bg-black text-white text-center">
     <div class="flex flex-col gap-2">
       <motion.div
@@ -60,6 +61,7 @@ import { motion } from "motion-v";
     </motion.div>
   </section>
 
+  <!-- footer -->
   <footer
     class="text-center py-2 md:py-4 text-xs md:text-sm text-gray-600 border-t border-gray-300"
   >

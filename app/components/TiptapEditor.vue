@@ -51,6 +51,7 @@ onUnmounted(() => {
 
 <template>
   <div class="w-full bg-gray-100">
+    <!-- back button -->
     <motion.div
       :initial="{ opacity: 0, x: -20 }"
       :animate="{ opacity: 1, x: 0 }"
@@ -73,12 +74,14 @@ onUnmounted(() => {
       </button>
     </motion.div>
 
+    <!-- editor & toolbar -->
     <div class="p-8 md:p-16">
       <EditorContent v-if="editor" :editor="editor" />
     </div>
 
     <TiptapToolbar v-if="editor" :editor="editor" />
 
+    <!-- save & export button -->
     <div class="fixed bottom-20 md:bottom-6 right-6 flex flex-col gap-2">
       <motion.div
         :initial="{ opacity: 0, x: 20 }"

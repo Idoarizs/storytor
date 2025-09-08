@@ -7,6 +7,7 @@ import { motion } from "motion-v";
   <section
     class="w-full min-h-screen max-w-xs md:max-w-5xl mx-auto flex flex-col items-center justify-center gap-8"
   >
+    <!-- top content -->
     <div class="flex items-start w-full">
       <motion.div
         class="flex-1"
@@ -40,7 +41,8 @@ import { motion } from "motion-v";
         </p>
       </motion.div>
     </div>
-
+    
+    <!-- bottom content -->
     <div class="mx-auto grid md:grid-cols-3">
       <motion.div
         v-for="(text, i) in [

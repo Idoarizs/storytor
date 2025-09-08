@@ -24,6 +24,7 @@ const props = defineProps<{ editor: Editor }>();
       delay: 0.2,
     }"
   >
+    <!-- toolbar items -->
     <div class="flex gap-2">
       <button
         v-for="(opt, idx) in toolbarOption"
