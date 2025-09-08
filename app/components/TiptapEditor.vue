@@ -4,9 +4,10 @@ import { computed, onMounted, onUnmounted } from "vue";
 
 // custom components
 import TiptapToolbar from "./TiptapToolbar.vue";
+import Toast from "./Toast.vue";
 
 // custom composables
-import { useTiptap, useStory } from "@/composables/index";
+import { useTiptap, useStory, useToast } from "@/composables/index";
 
 // tiptap [base]
 import { EditorContent } from "@tiptap/vue-3";
@@ -22,6 +23,7 @@ import { htmlToPDF } from "@/utils/export";
 
 const { editor } = useTiptap();
 const { createStory, readStory, updateStory } = useStory();
+const { show, isOpen, message } = useToast();
 
 const title = computed(() => {
   if (!editor.value) return "";
@@ -98,9 +100,11 @@ onUnmounted(() => {
             () => {
               if (props.type === 'create') {
                 createStory(editor);
+                show('Story created successfully!');
                 $router.back();
               } else {
                 updateStory(editor, props.id, title);
+                show('Story updated successfully!');
               }
             }
           "
@@ -131,5 +135,8 @@ onUnmounted(() => {
         </button>
       </motion.div>
     </div>
+
+    <!-- toast -->
+    <Toast v-model="isOpen" :message="message" />
   </div>
 </template>
