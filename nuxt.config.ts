@@ -20,5 +20,5 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["@/assets/css/global.css"],
 
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/tailwindcss", "motion-v/nuxt"],
 });
