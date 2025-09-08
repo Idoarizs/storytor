@@ -1,6 +1,9 @@
 <script setup lang="ts">
 // motion
 import { motion } from "motion-v";
+
+// data
+import { steps } from "@/data/data";
 </script>
 
 <template>
@@ -41,15 +44,11 @@ import { motion } from "motion-v";
         </p>
       </motion.div>
     </div>
-    
+
     <!-- bottom content -->
     <div class="mx-auto grid md:grid-cols-3">
       <motion.div
-        v-for="(text, i) in [
-          'Create your draft and jot down ideas quickly.',
-          'Attach references, quotes, or research sources.',
-          'Organize everything into stories you can grow.',
-        ]"
+        v-for="(text, i) in steps"
         :key="i"
         class="flex gap-4 p-4"
         :initial="{ opacity: 0, y: 30 }"

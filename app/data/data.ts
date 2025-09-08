@@ -19,7 +19,15 @@ import {
   Redo,
 } from "lucide-vue-next";
 
-export const toolbarOption = [
+// custom interfaces
+interface ToolbarOption {
+  title: string;
+  icon: any;
+  action: (editor: Editor) => void;
+  isActive: (editor: Editor) => boolean;
+}
+
+export const toolbarOption: ToolbarOption[] = [
   // bold
   {
     title: "Bold",
@@ -124,4 +132,10 @@ export const toolbarOption = [
     action: (editor: Editor) => editor.chain().focus().redo().run(),
     isActive: (editor: Editor) => !editor.can().redo(),
   },
+];
+
+export const steps: string[] = [
+  "Create your draft and jot down ideas quickly.",
+  "Attach references, quotes, or research sources.",
+  "Organize everything into stories you can grow.",
 ];
