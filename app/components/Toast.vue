@@ -23,7 +23,7 @@ const model = computed({
 <template>
   <v-snackbar
     v-model="model"
-    content-class="top-4 right-4 md:top-8 md:right-8 bg-green shadow-lg"
+    content-class="top-4 right-4 md:top-8 md:right-8 bg-black shadow-lg"
     location="top end"
     :timeout="3000"
   >

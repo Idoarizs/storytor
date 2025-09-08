@@ -3,8 +3,11 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
+// custom components
+import Toast from "@/components/Toast.vue";
+
 // custom composables
-import { useStory } from "@/composables/index";
+import { useStory, useToast } from "@/composables/index";
 
 // icons
 import { FileText, Trash2, Pen } from "lucide-vue-next";
@@ -13,6 +16,7 @@ import { FileText, Trash2, Pen } from "lucide-vue-next";
 import { motion } from "motion-v";
 
 const { getAllStories, deleteStory } = useStory();
+const { show, isOpen, message } = useToast();
 
 const stories = ref<any[]>([]);
 const router = useRouter();
@@ -24,6 +28,7 @@ const loadStories = () => {
 
 const handleDelete = (id: string) => {
   deleteStory(id);
+  show("Story deleted successfully!");
   loadStories();
 };
 
@@ -68,7 +73,7 @@ onUnmounted(() => {
 
     <div
       v-if="stories.length === 0"
-      class="flex flex-col items-center justify-center min-h-dvh gap-4"
+      class="flex flex-col items-center justify-center min-h-dvh gap-4 text-black"
     >
       <motion.div
         :initial="{ opacity: 0, y: 20 }"
@@ -94,7 +99,7 @@ onUnmounted(() => {
           delay: 0.2,
         }"
       >
-        <p>No story found</p>
+        <p class="text-sm font-medium">No story found</p>
       </motion.div>
     </div>
 
@@ -139,5 +144,8 @@ onUnmounted(() => {
         </div>
       </motion.div>
     </div>
+
+    <!-- toast -->
+    <Toast v-if="isOpen" v-model="isOpen" :message="message" />
   </div>
 </template>

@@ -127,7 +127,10 @@ onUnmounted(() => {
         }"
       >
         <button
-          @click="htmlToPDF(editor?.getHTML())"
+          @click="() => {
+            htmlToPDF(editor?.getHTML());
+            show('Exported to PDF successfully!');
+          }"
           class="bg-white/10 backdrop-blur-xl px-4 py-2 w-full rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
         >
           <FileDown class="w-4 h-4" />
@@ -137,6 +140,6 @@ onUnmounted(() => {
     </div>
 
     <!-- toast -->
-    <Toast v-model="isOpen" :message="message" />
+    <Toast v-if="isOpen" v-model="isOpen" :message="message" />
   </div>
 </template>
