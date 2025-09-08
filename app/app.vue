@@ -1,6 +1,8 @@
 <template>
   <ClientOnly>
-    <NuxtPage :transition="{ name: 'fade' }" />
+    <v-app>
+      <NuxtPage :transition="{ name: 'fade' }" />
+    </v-app>
   </ClientOnly>
 </template>
 
