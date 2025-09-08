@@ -96,7 +96,7 @@ onUnmounted(() => {
         }"
       >
         <button
-          @click="
+          @click.stop="
             () => {
               if (props.type === 'create') {
                 createStory(editor);

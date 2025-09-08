@@ -1,7 +1,10 @@
 {
-  "name": "nuxt-app",
+  "name": "storytor",
   "type": "module",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Minimalist story writing tool",
+  "author": "Aodi Saputra",
+  "private": false,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
