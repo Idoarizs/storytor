@@ -65,6 +65,6 @@ import { motion } from "motion-v";
   <footer
     class="text-center py-2 md:py-4 text-xs md:text-sm text-gray-600 border-t border-gray-300"
   >
-    © 2025 Storytor. Developed by <b>Aodi Saputra</b>.
+    Developed by <b>Aodi Saputra</b>.
   </footer>
 </template>
