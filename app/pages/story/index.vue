@@ -1,10 +1,11 @@
 <script setup lang="ts">
 // vue
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 // custom components
 import Toast from "@/components/Toast.vue";
 import SearchBar from "@/components/SearchBar.vue";
+import Pagination from "@/components/Pagination.vue";
 
 // custom composables
 import { useStory, useToast } from "@/composables/index";
@@ -23,6 +24,16 @@ const filteredStories = ref<any[]>([]);
 
 const search = ref<string>("");
 
+const totalData = ref<number>(0);
+const currentPage = ref<number>(1);
+const perPage = ref<number>(8);
+
+const paginatedStories = computed(() => {
+  const start = (currentPage.value - 1) * perPage.value;
+  const end = start + perPage.value;
+  return filteredStories.value.slice(start, end);
+});
+
 const onSubmit = (query: string) => {
   const q = query.toLowerCase().trim();
 
@@ -38,13 +49,16 @@ const onSubmit = (query: string) => {
 
 onMounted(() => {
   const all = getAllStories();
+
   stories.value = all;
   filteredStories.value = all;
+  totalData.value = filteredStories.value.length;
 });
 
 onUnmounted(() => {
   stories.value = [];
   filteredStories.value = [];
+  totalData.value = 0;
 });
 </script>
 
@@ -110,7 +124,7 @@ onUnmounted(() => {
 
     <div v-else class="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <motion.div
-        v-for="story in filteredStories"
+        v-for="story in paginatedStories"
         :key="story.id"
         class="relative cursor-pointer"
         :initial="{ opacity: 0, y: 20, x: 20 }"
@@ -156,7 +170,16 @@ onUnmounted(() => {
       </motion.div>
     </div>
 
-    <!-- toast -->
+    <div class="my-12 flex justify-end">
+      <Pagination
+        v-if="filteredStories.length > perPage"
+        :total="totalData"
+        :perPage="perPage"
+        :currentPage="currentPage"
+        @update:currentPage="(page) => (currentPage = page)"
+      />
+    </div>
+
     <Toast v-if="isOpen" v-model="isOpen" :message="message" />
   </div>
 </template>
