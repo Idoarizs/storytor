@@ -4,6 +4,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 // custom components
 import Toast from "@/components/Toast.vue";
+import SearchBar from "@/components/SearchBar.vue";
 
 // custom composables
 import { useStory, useToast } from "@/composables/index";
@@ -18,13 +19,32 @@ const { getAllStories, deleteStory } = useStory();
 const { show, isOpen, message } = useToast();
 
 const stories = ref<any[]>([]);
+const filteredStories = ref<any[]>([]);
+
+const search = ref<string>("");
+
+const onSubmit = (query: string) => {
+  const q = query.toLowerCase().trim();
+
+  if (!q) {
+    filteredStories.value = stories.value;
+    return;
+  }
+
+  filteredStories.value = stories.value.filter((story) =>
+    story.title.toLowerCase().includes(q)
+  );
+};
 
 onMounted(() => {
-  stories.value = getAllStories();
+  const all = getAllStories();
+  stories.value = all;
+  filteredStories.value = all;
 });
 
 onUnmounted(() => {
   stories.value = [];
+  filteredStories.value = [];
 });
 </script>
 
@@ -37,7 +57,6 @@ onUnmounted(() => {
           >Your <br />
           Stories</span
         >
-
         <i class="text-sm md:text-normal">"Sharing moments that inspire"</i>
       </div>
 
@@ -50,9 +69,15 @@ onUnmounted(() => {
       </button>
     </div>
 
+    <div class="flex justify-end mb-4">
+      <div class="md:max-w-[250px] w-full">
+        <SearchBar v-model="search" @submit="onSubmit" />
+      </div>
+    </div>
+
     <!-- bottom content -->
     <div
-      v-if="stories.length === 0"
+      v-if="filteredStories.length === 0"
       class="flex flex-col items-center justify-center min-h-dvh gap-4 text-black"
     >
       <motion.div
@@ -83,12 +108,9 @@ onUnmounted(() => {
       </motion.div>
     </div>
 
-    <div
-      v-else
-      class="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-    >
+    <div v-else class="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <motion.div
-        v-for="story in stories"
+        v-for="story in filteredStories"
         :key="story.id"
         class="relative cursor-pointer"
         :initial="{ opacity: 0, y: 20, x: 20 }"
@@ -99,7 +121,7 @@ onUnmounted(() => {
           type: 'spring',
           stiffness: 300,
           damping: 15,
-          delay: 0.2 * stories.indexOf(story),
+          delay: 0.2 * filteredStories.indexOf(story),
           duration: 1,
         }"
       >
@@ -110,7 +132,6 @@ onUnmounted(() => {
           class="relative bg-white border-2 border-black p-4 z-10"
         >
           <div class="flex items-center justify-between gap-4">
-            <!-- title -->
             <span class="text-sm md:text-lg font-semibold truncate">
               {{ story.title }}
             </span>
@@ -120,7 +141,9 @@ onUnmounted(() => {
                 () => {
                   deleteStory(story.id);
                   show('Story deleted successfully!');
-                  stories = getAllStories();
+                  const all = getAllStories();
+                  stories = all;
+                  filteredStories = all;
                 }
               "
             >
