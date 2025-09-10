@@ -42,10 +42,14 @@ const title = computed(() => {
 
 const onGenerate = () => {
   show("Generating story, please wait...");
-  chat().then((response) => {
-    editor.value?.commands.insertContent(response);
-    show("Story generated successfully!");
-  });
+  chat()
+    .then((response) => {
+      editor.value?.commands.insertContent(response);
+      show("Story generated successfully!");
+    })
+    .catch(() => {
+      show("Failed to generate story. Please try again.");
+    });
 };
 
 const props = defineProps<{
