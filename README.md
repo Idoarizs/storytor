@@ -12,7 +12,8 @@ Storytor is a minimalist web application designed for **writers, researchers, or
 - 📂 **Read Stories** – Access your saved drafts instantly  
 - ✏️ **Update Stories** – Edit and refine your drafts as they grow  
 - ❌ **Delete Stories** – Remove stories you no longer need
-- 💾 **Export to PDF** – Download your stories as PDF files for backup or sharing  
+- 💾 **Export to PDF** – Download your stories as PDF files for backup or sharing
+- 🤖 **AI-Powered Random Story Generator** - Start generating a random story using this AI-Powered integrated tool for your ideas development.
 
 ---
 
