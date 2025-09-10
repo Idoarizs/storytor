@@ -5,12 +5,15 @@ import { computed, onMounted, onUnmounted } from "vue";
 // custom components
 import TiptapToolbar from "./TiptapToolbar.vue";
 import Toast from "./Toast.vue";
+import TiptapMenu from "./TiptapMenu.vue";
 
 // custom composables
 import { useTiptap, useStory, useToast, useAI } from "@/composables/index";
 
 // tiptap [base]
 import { EditorContent } from "@tiptap/vue-3";
+
+// tiptap [menus]
 import { FloatingMenu } from "@tiptap/vue-3/menus";
 
 // icons
@@ -88,28 +91,29 @@ onUnmounted(() => {
 
     <!-- tiptap editor -->
     <div class="p-8 md:p-16">
-      <FloatingMenu :editor="editor" v-if="editor">
-        <motion.div
-          class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 rounded-full flex shadow-lg"
-          :whileHover="{ scale: 1.05 }"
-          :while-press="{ scale: 0.95 }"
-          :transition="{
-            type: 'spring',
-            stiffness: 300,
-            damping: 15,
-            duration: 1,
-          }"
-        >
-          <button @click="onGenerate()" class="flex gap-2">
-            <Sparkles class="w-4 h-auto" />
-            Generate Story
-          </button>
-        </motion.div>
-      </FloatingMenu>
-
       <EditorContent v-if="editor" :editor="editor" />
     </div>
 
+    <FloatingMenu :editor="editor" v-if="editor">
+      <motion.div
+        class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 rounded-full flex shadow-lg"
+        :whileHover="{ scale: 1.05 }"
+        :while-press="{ scale: 0.95 }"
+        :transition="{
+          type: 'spring',
+          stiffness: 300,
+          damping: 15,
+          duration: 1,
+        }"
+      >
+        <button @click="onGenerate()" class="flex gap-2">
+          <Sparkles class="w-4 h-auto" />
+          Generate Story
+        </button>
+      </motion.div>
+    </FloatingMenu>
+
+    <TiptapMenu v-if="editor" :editor="editor" />
     <TiptapToolbar v-if="editor" :editor="editor" />
 
     <!-- save & export button -->
@@ -137,7 +141,9 @@ onUnmounted(() => {
               }
             }
           "
+          :disabled="editor?.isEmpty"
           class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 w-full rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
+          :class="{ 'opacity-50 cursor-not-allowed': editor?.isEmpty }"
         >
           <Save class="w-4 h-auto" />
           {{ props.type === "create" ? "Create" : "Save" }}
@@ -162,7 +168,9 @@ onUnmounted(() => {
               show('Exported to PDF successfully!');
             }
           "
+          :disabled="editor?.isEmpty"
           class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 w-full rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
+          :class="{ 'opacity-50 cursor-not-allowed': editor?.isEmpty }"
         >
           <FileDown class="w-4 h-auto" />
           <span class="text-sm">Export to PDF</span>

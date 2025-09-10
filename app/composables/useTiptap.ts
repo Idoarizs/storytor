@@ -8,6 +8,8 @@ import { Editor } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import FileHandler from "@tiptap/extension-file-handler";
+import TextAlign from "@tiptap/extension-text-align";
+import { Placeholder, Dropcursor } from "@tiptap/extensions";
 
 const useTiptap = () => {
   const editor = ref<Editor | null>(null);
@@ -17,6 +19,13 @@ const useTiptap = () => {
       extensions: [
         StarterKit,
         Image,
+        Dropcursor,
+        TextAlign.configure({
+          types: ["heading", "paragraph"],
+        }),
+        Placeholder.configure({
+          placeholder: "Write something ...",
+        }),
         FileHandler.configure({
           allowedMimeTypes: [
             "image/png",

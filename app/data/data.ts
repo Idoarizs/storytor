@@ -17,33 +17,21 @@ import {
   Code,
   Undo,
   Redo,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
 } from "lucide-vue-next";
 
 // custom interfaces
-interface ToolbarOption {
+interface Option {
   title: string;
   icon: any;
   action: (editor: Editor) => void;
   isActive: (editor: Editor) => boolean;
 }
 
-export const toolbarOption: ToolbarOption[] = [
-  // bold
-  {
-    title: "Bold",
-    icon: Bold,
-    action: (editor: Editor) => editor.chain().focus().toggleBold().run(),
-    isActive: (editor: Editor) => editor.isActive("bold"),
-  },
-
-  // italic
-  {
-    title: "Italic",
-    icon: Italic,
-    action: (editor: Editor) => editor.chain().focus().toggleItalic().run(),
-    isActive: (editor: Editor) => editor.isActive("italic"),
-  },
-
+export const toolbarOption: Option[] = [
   // heading
   {
     title: "Heading 1",
@@ -131,6 +119,60 @@ export const toolbarOption: ToolbarOption[] = [
     icon: Redo,
     action: (editor: Editor) => editor.chain().focus().redo().run(),
     isActive: (editor: Editor) => !editor.can().redo(),
+  },
+];
+
+export const menuOption: Option[] = [
+  // bold
+  {
+    title: "Bold",
+    icon: Bold,
+    action: (editor: Editor) => editor.chain().focus().toggleBold().run(),
+    isActive: (editor: Editor) => editor.isActive("bold"),
+  },
+
+  // italic
+  {
+    title: "Italic",
+    icon: Italic,
+    action: (editor: Editor) => editor.chain().focus().toggleItalic().run(),
+    isActive: (editor: Editor) => editor.isActive("italic"),
+  },
+  
+  // left
+  {
+    title: "Align Left",
+    icon: AlignLeft,
+    action: (editor: Editor) =>
+      editor.chain().focus().setTextAlign("left").run(),
+    isActive: (editor: Editor) => editor.isActive({ textAlign: "left" }),
+  },
+
+  // center
+  {
+    title: "Align Center",
+    icon: AlignCenter,
+    action: (editor: Editor) =>
+      editor.chain().focus().setTextAlign("center").run(),
+    isActive: (editor: Editor) => editor.isActive({ textAlign: "center" }),
+  },
+
+  // right
+  {
+    title: "Align Right",
+    icon: AlignRight,
+    action: (editor: Editor) =>
+      editor.chain().focus().setTextAlign("right").run(),
+    isActive: (editor: Editor) => editor.isActive({ textAlign: "right" }),
+  },
+
+  // justify
+  {
+    title: "Justify",
+    icon: AlignJustify,
+    action: (editor: Editor) =>
+      editor.chain().focus().setTextAlign("justify").run(),
+    isActive: (editor: Editor) => editor.isActive({ textAlign: "justify" }),
   },
 ];
 
