@@ -7,13 +7,14 @@ import TiptapToolbar from "./TiptapToolbar.vue";
 import Toast from "./Toast.vue";
 
 // custom composables
-import { useTiptap, useStory, useToast } from "@/composables/index";
+import { useTiptap, useStory, useToast, useAI } from "@/composables/index";
 
 // tiptap [base]
 import { EditorContent } from "@tiptap/vue-3";
+import { FloatingMenu } from "@tiptap/vue-3/menus";
 
 // icons
-import { ArrowLeft, FileDown, Save } from "lucide-vue-next";
+import { ArrowLeft, FileDown, Save, Sparkles } from "lucide-vue-next";
 
 // motion
 import { motion } from "motion-v";
@@ -24,6 +25,7 @@ import { htmlToPDF } from "@/utils/export";
 const { editor } = useTiptap();
 const { createStory, readStory, updateStory } = useStory();
 const { show, isOpen, message } = useToast();
+const { chat } = useAI();
 
 const title = computed(() => {
   if (!editor.value) return "";
@@ -34,6 +36,14 @@ const title = computed(() => {
 
   return h1 ? h1.textContent?.trim() ?? "" : "";
 });
+
+const onGenerate = () => {
+  show("Generating story, please wait...");
+  chat().then((response) => {
+    editor.value?.commands.insertContent(response);
+    show("Story generated successfully!");
+  });
+};
 
 const props = defineProps<{
   id?: string;
@@ -76,8 +86,27 @@ onUnmounted(() => {
       </button>
     </motion.div>
 
-    <!-- editor & toolbar -->
+    <!-- tiptap editor -->
     <div class="p-8 md:p-16">
+      <FloatingMenu :editor="editor" v-if="editor">
+        <motion.div
+          class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 rounded-full flex shadow-lg"
+          :whileHover="{ scale: 1.05 }"
+          :while-press="{ scale: 0.95 }"
+          :transition="{
+            type: 'spring',
+            stiffness: 300,
+            damping: 15,
+            duration: 1,
+          }"
+        >
+          <button @click="onGenerate()" class="flex gap-2">
+            <Sparkles class="w-4 h-auto" />
+            Generate Story
+          </button>
+        </motion.div>
+      </FloatingMenu>
+
       <EditorContent v-if="editor" :editor="editor" />
     </div>
 
@@ -110,7 +139,7 @@ onUnmounted(() => {
           "
           class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 w-full rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
         >
-          <Save class="w-4 h-4" />
+          <Save class="w-4 h-auto" />
           {{ props.type === "create" ? "Create" : "Save" }}
         </button>
       </motion.div>
@@ -127,13 +156,15 @@ onUnmounted(() => {
         }"
       >
         <button
-          @click="() => {
-            htmlToPDF(editor?.getHTML());
-            show('Exported to PDF successfully!');
-          }"
-          class="bg-white/10 backdrop-blur-xl px-4 py-2 w-full rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
+          @click="
+            () => {
+              htmlToPDF(editor?.getHTML());
+              show('Exported to PDF successfully!');
+            }
+          "
+          class="bg-white/10 text-sm backdrop-blur-xl px-4 py-2 w-full rounded-full flex items-center gap-2 shadow-lg z-50 hover:scale-105 transition-all duration-300"
         >
-          <FileDown class="w-4 h-4" />
+          <FileDown class="w-4 h-auto" />
           <span class="text-sm">Export to PDF</span>
         </button>
       </motion.div>
