@@ -2,6 +2,8 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  devtools: { enabled: false },
+  css: ["@/assets/css/global.css"],
   app: {
     head: {
       title: "Storytor – Minimalist Space for Data Storytellers",
@@ -19,8 +21,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-  devtools: { enabled: false },
-  css: ["@/assets/css/global.css"],
   modules: [
     // tailwindcss
     "@nuxtjs/tailwindcss",
@@ -40,7 +40,12 @@ export default defineNuxtConfig({
     "nuxt-gtag",
   ],
   gtag: {
-    id: process.env.GA_TRACKING_ID
+    id: process.env.NUXT_GA_TRACKING_ID,
+  },
+  runtimeConfig: {
+    public: {
+      apiKey: process.env.NUXT_GEMINI_API_KEY,
+    },
   },
   build: {
     transpile: ["vuetify"],
